@@ -226,6 +226,18 @@ func (s ServerHardware) GetPowerState() (PowerState, error) {
 	return pt.State, nil
 }
 
+// GetSupportData gets the support data
+func (s ServerHardware) GetSupportData() (SupportServerHardware, error) {
+	var (
+		supportData SupportServerHardware
+		err         error
+	)
+
+	supportData, err = s.Client.GetSupportServerHardware(string(s.UUID))
+
+	return supportData, err
+}
+
 // Add single rack server to the appliance
 func (c *OVClient) AddRackServer(rackServer ServerHardware) (utils.Nstring, error) {
 	log.Infof("Adding rack server %s.", rackServer.Hostname)
